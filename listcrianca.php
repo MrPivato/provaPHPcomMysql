@@ -1,7 +1,32 @@
 <?php include 'inc/validate.php' ?>
 <?php include 'inc/head.php' ?>
 <?php include 'inc/nav.php' ?>
+<?php
+function mostraTabela()
+{
 
+        global $mysqli;
+
+        //Pesquisa
+        if (isset($_POST["nome"])) {
+                $_POST['nome'] = $mysqli->real_escape_string($_POST['nome']);
+                $sql = "SELECT id, nome, sexo, idade FROM crianca WHERE nome like '%{$_POST['nome']}%' ORDER BY nome";                                
+        }else{
+                $sql = "SELECT id, nome, sexo, idade FROM crianca ORDER BY nome";
+        }
+
+        $resultado = $mysqli->query($sql);
+        while($registro = $resultado->fetch_array()){
+                $sql = "<tr>";
+                $sql .= "<td>{$registro['nome']}</td>";
+                $sql .= "<td>{$registro['sexo']}</td>";
+                $sql .= "<td>{$registro['idade']}</td>";
+                $sql .= "<td><a href='cadcrianca.php?id={$registro['id']}'>Alterar</a> | <a href='listcrianca.php?id={$registro['id']}'>Excluir</a></td>";
+                echo $sql;
+        }
+        $resultado->free();
+}
+?>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -33,6 +58,7 @@
                         <tbody>
                             <?php 
                             require 'inc/connection.php';
+
                             //Exclusão
                             if (isset($_GET["id"])) {
                                 $sql = " DELETE FROM crianca " .
@@ -40,31 +66,18 @@
                                  $resultado = $mysqli->query($sql);
                                  if ($resultado === true) {
                                     echo "<div class='alert alert-success'>";
-                                    echo "<strong>Sucesso!</strong> Produto apagado com sucesso!";
+                                    echo "<strong>Sucesso!</strong> Criança apagada com sucesso!";
                                     echo "</div>";                                    
                                  } else {
                                     echo "<div class='alert alert-danger'>";
                                     echo "Erro: " . $sql . "<br>" . $mysqli->error;
                                     echo "</div>";
                                  }
-                            }else{
-                                //Pesquisa
-                                if (isset($_POST["nome"])) {
-                                    $sql = "SELECT id, nome, sexo, idade FROM crianca WHERE nome like '%{$_POST['nome']}%'";                                
-                                }else{
-                                    $sql = "SELECT id, nome, sexo, idade FROM crianca";
-                                }
 
-                                $resultado = $mysqli->query($sql);
-                                while($registro = $resultado->fetch_array()){
-                                    $sql = "<tr>";
-                                    $sql .= "<td>{$registro['nome']}</td>";
-                                    $sql .= "<td>{$registro['sexo']}</td>";
-                                    $sql .= "<td>{$registro['idade']}</td>";
-                                    $sql .= "<td><a href='cadcrianca.php?id={$registro['id']}'>Alterar</a> | <a href='listcrianca.php?id={$registro['id']}'>Excluir</a></td>";
-                                    echo $sql;
-                                }
-                                $resultado->free();
+                                 mostraTabela();
+
+                            }else{
+                                 mostraTabela();
                             }
                             
                             $mysqli->close();
