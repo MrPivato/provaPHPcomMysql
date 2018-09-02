@@ -32,6 +32,7 @@ function mostraTabela()
         <div class="panel-heading">
             <h2 class="panel-title text-center">Gestão de Crianças</h2>
         </div>
+        <div class="float-right"><a href="cadcrianca.php">Nova Criança</a> | <a href="sair.php">Sair</a></div><br>                   
         <div class="panel-body">
 
             <form action="listcrianca.php" method="post" class="form-horizontal">

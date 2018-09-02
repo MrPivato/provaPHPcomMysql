@@ -124,6 +124,7 @@ if ($_POST)
         <div class="panel-heading">
             <h2 class="panel-title text-center">Gestão de Crianças</h2>
         </div>
+        <div class="float-right"><a href="listcrianca.php">Voltar</a> | <a href="sair.php">Sair</a></div><br>                   
         <div class="panel-body">
             <form action="cadcrianca.php" method="post" class="form-horizontal">
                 <fieldset>
@@ -191,7 +192,7 @@ if ($_POST)
 
                         <div class="form-group col-md-6">
                             <label class="control-label" for="telefone">Telefone:</label>  
-                            <input id="telefone" name="telefone" type="text" aria-describedby="telHelp"  placeholder="Digite o e-mail" class="form-control" required="" value="">
+                            <input id="telefone" name="telefone" type="text" aria-describedby="telHelp"  placeholder="Digite o telefone" class="form-control" required="" value="">
                             <small id="telHelp" class="form-text text-muted">Ex: (54)9876-5432</small>
                         </div>
                     </div>
