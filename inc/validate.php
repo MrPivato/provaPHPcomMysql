@@ -1,6 +1,7 @@
 <?php
 session_start();
-if(!isset($_SESSION['login']) == true){
+
+if(isset($_SESSION['id']) == false && $_COOKIE == false){
         header("Location: login.php");
 }
 ?>

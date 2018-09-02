@@ -1,6 +1,6 @@
 <?php include 'inc/validate.php' ?>
 <?php include 'inc/head.php' ?>
-<?php include 'inc/nav.php'; var_dump($_SESSION)?>
+<?php include 'inc/nav.php' ?>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -18,4 +18,4 @@
     </div>
 </div>    
 
-<?php include 'inc/tail.php'; session_destroy(); ?>
+<?php include 'inc/tail.php' ?>

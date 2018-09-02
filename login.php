@@ -1,4 +1,8 @@
-<?php include 'inc/head.php'; ?>
+<?php
+if(isset($_COOKIE['isRemembered'])){
+        header("Location: home.php");
+}
+?>
 
 <?php 
 if ($_POST)
@@ -9,7 +13,7 @@ if ($_POST)
         $login = $_POST['email'];
         $senha = md5($_POST['senha']);
 
-        if (isset($_POST["lembrar"]))
+        if (isset($_POST['lembrar']))
         {
                 $lembrar = true;
         }
@@ -24,10 +28,15 @@ if ($_POST)
 
         $rows = mysqli_num_rows($result);
 
-        if($rows == 1){
-                $_SESSION['login'] = $login;
-                $_SESSION['lembrar'] = $lembrar;
-                header("Location: home.php");
+        if($rows == 1)
+        {
+                $register = $result->fetch_array();
+
+                $_SESSION['id'] = $register['id'];
+
+                setcookie('isRemembered', $lembrar);
+
+                header('Location: home.php');
         }
         else
         {
@@ -36,6 +45,8 @@ if ($_POST)
 
 }
 ?>
+<?php include 'inc/head.php'; ?>
+
 <!-- Menu -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
           <div class="container">
