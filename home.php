@@ -7,7 +7,7 @@
             <h2 class="panel-title text-center">Gestão da Clínica Vaccinare</h2>
         </div>
         <div class="panel-body">
-            <p> Seja bem vindo(a), <strong> Administrador</strong>.</p>
+        <p> Seja bem vindo(a), <strong> <?php echo $_SESSION['nome']?> </strong>.</p>
             <p> Este é o Site de Adminitração da Clínica Vaccinare.</p>
             <p>Neste espaço é possível:</p>
             <ul class="list">

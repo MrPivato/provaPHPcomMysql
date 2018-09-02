@@ -33,6 +33,7 @@ if ($_POST)
                 $register = $result->fetch_array();
 
                 $_SESSION['id'] = $register['id'];
+                $_SESSION['nome'] = $register['nome'];
 
                 setcookie('isRemembered', $lembrar);
 
