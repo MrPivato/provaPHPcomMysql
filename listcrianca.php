@@ -1,38 +1,15 @@
 <?php include 'inc/validate.php' ?>
 <?php include 'inc/head.php' ?>
 <?php include 'inc/nav.php' ?>
-<?php
-function mostraTabela()
-{
+<?php include 'inc/listcrianca.inc.php' ?>
 
-        global $mysqli;
-
-        //Pesquisa
-        if (isset($_POST["nome"])) {
-                $_POST['nome'] = $mysqli->real_escape_string($_POST['nome']);
-                $sql = "SELECT id, nome, sexo, idade FROM crianca WHERE nome like '%{$_POST['nome']}%' ORDER BY nome";                                
-        }else{
-                $sql = "SELECT id, nome, sexo, idade FROM crianca ORDER BY nome";
-        }
-
-        $resultado = $mysqli->query($sql);
-        while($registro = $resultado->fetch_array()){
-                $sql = "<tr>";
-                $sql .= "<td>{$registro['nome']}</td>";
-                $sql .= "<td>{$registro['sexo']}</td>";
-                $sql .= "<td>{$registro['idade']}</td>";
-                $sql .= "<td><a href='cadcrianca.php?id={$registro['id']}'>Alterar</a> | <a href='listcrianca.php?id={$registro['id']}'>Excluir</a></td>";
-                echo $sql;
-        }
-        $resultado->free();
-}
-?>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="panel-title text-center">Gestão de Crianças</h2>
         </div>
         <div class="float-right"><a href="cadcrianca.php">Nova Criança</a> | <a href="sair.php">Sair</a></div><br>                   
+<br>
         <div class="panel-body">
 
             <form action="listcrianca.php" method="post" class="form-horizontal">
@@ -90,5 +67,4 @@ function mostraTabela()
                 </div>
             </div>
         </div>
-
 <?php include 'inc/tail.php' ?>

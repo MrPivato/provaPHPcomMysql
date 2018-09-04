@@ -1,6 +1,7 @@
 <?php include 'inc/validate.php' ?>
 <?php include 'inc/head.php' ?>
 <?php include 'inc/nav.php' ?>
+
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">

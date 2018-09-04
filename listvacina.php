@@ -1,39 +1,15 @@
 <?php include 'inc/validate.php' ?>
 <?php include 'inc/head.php' ?>
 <?php include 'inc/nav.php' ?>
+<?php include 'inc/listvacina.inc.php' ?>
 
-<?php
-function mostraTabela()
-{
-
-        global $mysqli;
-
-        //Pesquisa
-        if (isset($_POST["nome"])) {
-                $_POST['nome'] = $mysqli->real_escape_string($_POST['nome']);
-                $sql = "SELECT crianca.id, crianca.nome, crianca.sexo, vacina.dataVacina FROM crianca INNER JOIN vacina ON vacina.id_crianca = crianca.id WHERE nome like '%{$_POST['nome']}%' ORDER BY nome";                                
-        }else{
-                $sql = "SELECT crianca.id, crianca.nome, crianca.sexo, vacina.dataVacina FROM crianca INNER JOIN vacina ON vacina.id_crianca = crianca.id ORDER BY nome";
-        }
-
-        $resultado = $mysqli->query($sql);
-        while($registro = $resultado->fetch_array()){
-                $sql = "<tr>";
-                $sql .= "<td>{$registro['nome']}</td>";
-                $sql .= "<td>{$registro['sexo']}</td>";
-                $sql .= "<td>{$registro['dataVacina']}</td>";
-                $sql .= "<td><a href='detalhevacina.php?id={$registro['id']}&nome={$registro['nome']}'>Detalhes</a></td>";
-                echo $sql;
-        }
-        $resultado->free();
-}
-?>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="panel-title text-center">Gestão de Vacinas</h2>
         </div>
         <div class="float-right"><a href="cadvacina.php">Nova Vacina</a> | <a href="sair.php">Sair</a></div><br>                   
+<br>
         <div class="panel-body">
 
             <form action="listvacina.php" method="post" class="form-horizontal">
@@ -53,7 +29,7 @@ function mostraTabela()
                             <tr>
                                 <th>Nome</th>
                                 <th>Sexo</th>
-                                <th>Data Vacina</th>
+                                <th>Última Vacina</th>
                                 <th>Detalhes</th>
                             </tr>
                         </thead>
